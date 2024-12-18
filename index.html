@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>made with React</title>
+  </head>
+  <body
+    style="background-image: url('gradient_bg.webp')"
+    class="bg-cover flex justify-center items-center h-screen"
+  >
+    <!-- React will render dynamic content into this div -->
+    <div id="root"></div>
+
+    <script>
+      // React component without Babel
+      const { useState } = React;
+
+      // The main App component
+      function App() {
+        // Declare state to store user input
+        const [userInputText, setUserInputText] = useState('');
+
+        // Handle input change and update state
+        const handleInputChange = (e) => {
+          setUserInputText(e.target.value);  // Set the state with the new input value
+        };
+
+        return React.createElement(
+          'div',
+          { id: 'container', className: 'flex justify-center items-center' },
+          React.createElement(
+            'div',
+            { id: 'card1', className: 'flex flex-col justify-center items-center w-48 h-28 rounded-xl shadow-2xl bg-transparent backdrop-blur-lg' },
+            React.createElement('p', { id: 'temp' }, userInputText),  // Display the current input text
+            React.createElement('input', {
+              type: 'text',
+              value: userInputText,  // Bind the input's value to state
+              onChange: handleInputChange,  // Update state on input change
+              className: 'm-2 w-[100px] outline outline-2 outline-gray-900 bg-transparent backdrop-blur-sm rounded-md p-1',
+              placeholder: 'Your name'
+            })
+          )
+        );
+      }
+
+      // Ensure the root element exists
+      const rootElement = document.getElementById("root");
+
+      // Use ReactDOM.createRoot to render the App component inside the root element
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(React.createElement(App));
+    </script>
+  </body>
+</html>
